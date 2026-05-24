@@ -487,6 +487,83 @@ const devices = {
   },
 
 
+  "samsung-tv": {
+
+    "meta": {
+      "friendlyName": "Samsung TV",
+      "supported": true,
+    },
+
+    "Smart TV": {
+
+      "samsung-smart-tv-2016plus": {
+        "supported": true,
+        "friendlyName": "Samsung Smart TV (Tizen 2016+)",
+        "defaultRemoteStyle": "RHR",
+        "hdmiInputs": 4,
+        "tuner": true,
+      },
+      "samsung-smart-tv-legacy": {
+        "supported": true,
+        "friendlyName": "Samsung Smart TV (Legacy WebSocket)",
+        "defaultRemoteStyle": "RHR",
+        "hdmiInputs": 4,
+        "tuner": true,
+      },
+
+    },
+
+  },
+
+
+  "tivo": {
+
+    "meta": {
+      "friendlyName": "TiVo",
+      "supported": true,
+    },
+
+    "DVR": {
+
+      "tivo-bolt": {
+        "supported": true,
+        "friendlyName": "TiVo BOLT",
+        "defaultRemoteStyle": "RVRP",
+        "hdmiInputs": 0,
+        "tuner": true,
+      },
+      "tivo-roamio": {
+        "supported": true,
+        "friendlyName": "TiVo Roamio",
+        "defaultRemoteStyle": "RVRP",
+        "hdmiInputs": 0,
+        "tuner": true,
+      },
+      "tivo-edge": {
+        "supported": true,
+        "friendlyName": "TiVo EDGE",
+        "defaultRemoteStyle": "RVRP",
+        "hdmiInputs": 0,
+        "tuner": true,
+      },
+      "tivo-mini": {
+        "supported": true,
+        "friendlyName": "TiVo Mini",
+        "defaultRemoteStyle": "RVR",
+        "hdmiInputs": 0,
+      },
+      "tivo-generic": {
+        "supported": true,
+        "friendlyName": "TiVo (Generic)",
+        "defaultRemoteStyle": "RVRP",
+        "hdmiInputs": 0,
+      },
+
+    },
+
+  },
+
+
   "none": {
 
     "meta": {

@@ -1,5 +1,5 @@
 {
-    "name": "Firemote Card",
+    "name": "Firemote Plus Card",
     "render_readme": true,
-    "filename": "HA-Firemote.js"
+    "filename": "HA-Firemote-Plus.js"
 }

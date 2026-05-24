@@ -72,7 +72,7 @@ Short demonstration videos also exist for [Roku Firemote](https://www.youtube.co
      - Set up the Home Assistant [Apple TV Integration](https://www.home-assistant.io/integrations/apple_tv) and connect it to your device.  This will create a "Media Player" entity, and a "Remote" entity automatically.
    - Roku Users
      - Set up the Home Assistant [Roku Integration](https://www.home-assistant.io/integrations/roku) and connect it to your device.  This will create a "Media Player" entity, a "Remote" entity, and multiple others as well.
-1. Click on the HACS sidebar option, then type "Firemote Card" into the search bar
+1. Click on the HACS sidebar option, then type "Firemote Plus Card" into the search bar
 1. Use the 3 dots on the right side of the search result to select **Download** or click on the search result then tap the DOWNLOAD button in the lower right.
 1. You will be prompted to reload your browser.  Click the **RELOAD** button to continue
 
@@ -89,15 +89,15 @@ Short demonstration videos also exist for [Roku Firemote](https://www.youtube.co
    - Roku Users
      - Set up the Home Assistant [Roku Integration](https://www.home-assistant.io/integrations/roku) and connect it to your device.  This will create a "Media Player" entity, a "Remote" entity, and multiple others as well.
 1. Download the contents of the [dist/](https://github.com/PRProd/HA-Firemote/blob/main/dist/) directory, and place it in your Home Assistant /config/www directory
-1. [Register the HA-Firemote.js file that you just installed as a new resource](https://developers.home-assistant.io/docs/frontend/custom-ui/registering-resources/)
+1. [Register the HA-Firemote-Plus.js file that you just installed as a new resource](https://developers.home-assistant.io/docs/frontend/custom-ui/registering-resources/)
 
 <br>
 <br>
 
 ## How to use
 1. On any dashboard, click the +ADD CARD button
-1. Search by cards for "Firemote Card" and click on it - [help: It's not showing up](https://github.com/PRProd/HA-Firemote/wiki/Force-a-Refresh)
-1. Under the **Device Family** dropdown, choose "Amazon Fire", "Apple TV",  "Chromecast", "Homatics", "NVIDIA Shield", "onn.", "Roku", "Xiaomi", or "[none/other](https://github.com/PRProd/HA-Firemote/wiki/entity:-none)"
+1. Search by cards for "Firemote Plus Card" and click on it - [help: It's not showing up](https://github.com/PRProd/HA-Firemote/wiki/Force-a-Refresh)
+1. Under the **Device Family** dropdown, choose "Amazon Fire", "Apple TV", "Samsung TV", "TiVo", "Chromecast", "Homatics", "NVIDIA Shield", "onn.", "Roku", "Xiaomi", or "[none/other](https://github.com/PRProd/HA-Firemote/wiki/entity:-none)"
    - Amazon, Chromecast, Shield, onn., Xiaomi, or Android TV users:
      - Under **Device Model**, select the device model that you own. (Help: Which [Amazon Fire](https://developer.amazon.com/docs/fire-tv/device-specifications.html) or [NVIDIA Shield](https://www.nvidia.com/en-us/shield/)  device do I own?)
      - Under the Android Debug Bridge Entity dropdown, a list of your Android Debug Bridge integration entities will appear.  Select the one you wish to control.
@@ -131,7 +131,7 @@ Short demonstration videos also exist for [Roku Firemote](https://www.youtube.co
 ## YAML card setup options
 Examples:
 ```yaml
-type: custom:firemote-card
+type: custom:firemote-plus-card
 entity: media_player.fire_tv_192_168_1_30
 device_family: amazon-fire
 device_type: fire_tv_4_series
@@ -144,7 +144,7 @@ hdmi_1: Cable
 scale: 85
 ```
 ```yaml
-type: custom:firemote-card
+type: custom:firemote-plus-card
 entity: media_player.apple_tv_4k_2nd_gen
 device_family: apple-tv
 device_type: appletv-4k-gen2
@@ -161,7 +161,7 @@ button_overrides:
     script: receiver_mute_script
 ```
 ```yaml
-type: custom:firemote-card
+type: custom:firemote-plus-card
 entity: media_player.android_tv_192_168_107_209
 device_family: nvidia-shield
 device_type: shield-tv-pro-2019
@@ -176,14 +176,16 @@ app_launch_3: function-mute
 Options:
 | Name                   | Type   | Required | Options                                                          | Description                            |
 | ---------------------- | ------ | -------- | ---------------------------------------------------------------- | -------------------------------------- |
-| type                   | string | yes      | custom:firemote-card                                             | Type of the card                       |
-| entity                 | string | yes      | any valid media player entity created in the [Android Debug Bridge Integration](https://www.home-assistant.io/integrations/androidtv/), [Apple TV Integration](https://www.home-assistant.io/integrations/apple_tv) or the [Roku Integration](https://www.home-assistant.io/integrations/roku) or [none](https://github.com/PRProd/HA-Firemote/wiki/entity:-none)| entity_id                              |
-| device_family          | string | yes      | amazon-fire<br>apple-tv<br>chromecast<br>nvidia-shield<br>onn<br>roku<br>xiaomi<br>[none](https://github.com/PRProd/HA-Firemote/wiki/entity:-none) | Manufacturer Family            |
-|android_tv_remote_entity| string | no       | any valid entity created in the [Android TV Remote Integration](https://www.home-assistant.io/integrations/androidtv_remote/) | entity_id<br>Ignored in Apple TV and Roku configurations |
+| type                   | string | yes      | custom:firemote-plus-card                                        | Type of the card                       |
+| entity                 | string | yes      | any valid media player entity created in the [Android Debug Bridge Integration](https://www.home-assistant.io/integrations/androidtv/), [Apple TV Integration](https://www.home-assistant.io/integrations/apple_tv), [Samsung Smart TV Integration](https://www.home-assistant.io/integrations/samsungtv), [Roku Integration](https://www.home-assistant.io/integrations/roku), TiVo integrations, or [none](https://github.com/PRProd/HA-Firemote/wiki/entity:-none)| entity_id                              |
+| device_family          | string | yes      | amazon-fire<br>apple-tv<br>samsung-tv<br>tivo<br>chromecast<br>nvidia-shield<br>onn<br>roku<br>xiaomi<br>[none](https://github.com/PRProd/HA-Firemote/wiki/entity:-none) | Manufacturer Family            |
+|android_tv_remote_entity| string | no       | any valid entity created in the [Android TV Remote Integration](https://www.home-assistant.io/integrations/androidtv_remote/) | entity_id<br>Ignored in Apple TV, Roku, Samsung TV, and TiVo configurations |
 | apple_tv_remote_entity | string | yes*     | any valid remote entity created in the [Apple TV Integration](https://www.home-assistant.io/integrations/apple_tv)  | entity_id<br>* Required ONLY in Apple TV configurations |
 | roku_remote_entity     | string | yes*     | any valid remote entity created in the [Roku Integration](https://www.home-assistant.io/integrations/roku/)  | entity_id<br>* Required ONLY in Roku configurations |
+| samsung_tv_remote_entity | string | yes*   | any valid remote entity created in the [Samsung Smart TV Integration](https://www.home-assistant.io/integrations/samsungtv)  | entity_id<br>* Required ONLY in Samsung TV configurations |
+| tivo_remote_entity     | string | yes*     | any valid remote entity created by your TiVo integration  | entity_id<br>* Required ONLY in TiVo configurations |
 | device_type            | string | yes      | [appletv-4k-gen3](https://support.apple.com/kb/SP886)<br>[appletv-4k-gen2](https://support.apple.com/kb/SP845)<br>[appletv-4k-gen1](https://support.apple.com/kb/SP769)<br>[appletv-gen4](https://support.apple.com/kb/SP724)<br>[appletv-gen3](https://support.apple.com/kb/SP648)<br>[appletv-gen2](https://support.apple.com/kb/SP598)<br>[appletv-gen1](https://support.apple.com/kb/SP19)<br>chromecast-4k<br>[fire_tv_toshiba_v35](https://github.com/PRProd/HA-Firemote/wiki/Smart-TV---Toshiba-V35-Series-LED-FHD-HD---Fire-TV-(2021)) <br> [fire_tv_4_series](https://github.com/PRProd/HA-Firemote/wiki/Smart-TV---Fire-TV-4-Series-(2021)) <br> fire_tv_jvc-4k-2021 <br> fire_tv_insignia_f20 <br> [fire_tv_cube_third_gen](https://github.com/PRProd/HA-Firemote/wiki/Fire-TV-Cube---3rd-Gen-(2022)) <br> [fire_tv_cube_second_gen](https://github.com/PRProd/HA-Firemote/wiki/Fire-TV-Cube---2nd-Gen-(2019)) <br> [fire_tv_cube_first_gen](https://github.com/PRProd/HA-Firemote/wiki/Fire-TV-Cube---1st-Gen-(2018)) <br> [fire_tv_stick_4k_max_second_gen](https://github.com/PRProd/HA-Firemote/wiki/Fire-TV-Stick-4K-Max-2nd-Gen-(2023)) <br> [fire_tv_stick_4k_second_gen](https://github.com/PRProd/HA-Firemote/wiki/Fire-TV-Stick-4K-2nd-Gen-(2023)) <br>[fire_tv_stick_4k_max](https://github.com/PRProd/HA-Firemote/wiki/Fire-TV-Stick-4K-Max---1st-Gen-(2021)) <br> [fire_tv_3rd_gen](https://github.com/PRProd/HA-Firemote/wiki/Fire-TV-Stick---3rd-Gen-(2020)) <br> [fire_tv_stick_lite](https://github.com/PRProd/HA-Firemote/wiki/Fire-TV-Stick-Lite---1st-Gen-(2020)) <br> [fire_stick_4k](https://github.com/PRProd/HA-Firemote/wiki/Fire-TV-Stick-4K---1st-Gen-(2018)) <br> [fire_stick_second_gen](https://github.com/PRProd/HA-Firemote/wiki/Fire-TV-Stick---2nd-Gen-(2016---2019)) <br> [fire_stick_first_gen](https://github.com/PRProd/HA-Firemote/wiki/Fire-TV-Stick-1st-Gen-(2014)) <br> [fire_tv_second_gen_2015](https://github.com/PRProd/HA-Firemote/wiki/Fire-TV-%E2%80%90-2nd-Gen-(2015)) <br> [box-4-4k-plus](https://github.com/PRProd/HA-Firemote/wiki/Homatics-Box-R-4K-Plus) <br> dune-hd-box-4-4k-plus <br>  onn-streaming-device-4k-pro <br> [onn-4k-streaming-box](https://github.com/PRProd/HA-Firemote/wiki/onn.-Google-TV-4K-Streaming-Box-(2023)) <br> onn-full-hd-streaming-stick <br> roku-streambar-pro <br> roku-streambar <br> roku-ultra-lt-2023 <br> roku-ultra-lt <br> roku-ultra-2020 <br> roku-streaming-stick-4k <br> roku-express-4k-plus <br> roku-express-4k <br> roku-express <br> roku-premiere <br> roku-generic-hisense <br> roku-generic-tcl <br> roku-generic-westinghouse <br> shield-tv-2017 <br> shield-tv-pro-2017 <br> shield-tv-2019 <br> shield-tv-pro-2019 <br> mi-box-s <br> xiaomi-tv-stick-4k <br> [other](https://github.com/PRProd/HA-Firemote/wiki/entity:-none)| The type of device you are controlling<br>[Which devices are supported?](https://github.com/PRProd/HA-Firemote/wiki/Supported-Devices) |
-| compatibility_mode | string | no | default <br> strong <br> event0 <br> event1 <br> event2 <br> event3 <br> event4 <br> event5 <br> event6 <br> event7 <br> event8 <br> event9 <br> event10 <br> event11 <br> event12 <br> event13 | Adjust this value only if your buttons are completely unresponsive<br><br>Ignored in Apple TV configurations<br><br>[FAQ Available for additional help](https://github.com/PRProd/HA-Firemote#faq) |
+| compatibility_mode | string | no | default <br> strong <br> event0 <br> event1 <br> event2 <br> event3 <br> event4 <br> event5 <br> event6 <br> event7 <br> event8 <br> event9 <br> event10 <br> event11 <br> event12 <br> event13 | Adjust this value only if your buttons are completely unresponsive<br><br>Ignored in Apple TV, Roku, Samsung TV, and TiVo configurations<br><br>[FAQ Available for additional help](https://github.com/PRProd/HA-Firemote#faq) |
 |defaultRemoteStyle_override | string | no | AF1 <br> AF2 <br> AF3 <br> AF4 <br> AF5 <br> AF6 <br> AFJTV <br> AFXF2 <br> AR1 <br> AR2 <br> AR3 <br> CC1 <br> CC2 <br> CC3 <br> HO1 <br> HO2 <br> HO3 <br> HO4 <br> NS1 <br> NS2 <br> ON1 <br> ON2 <br> RVRP <br> RVR <br> RSR <br> RHR <br> RTR <br> RWR <br> XM1 <br> XM2 <br> AL1 <br> AL2 | Optionally select a style of remote different from the one that shipped with your device |
 | app_launch_1<br>app_launch_2<br>app_launch_3<br>app_launch_4<br>app_launch_5<br>etc... | string | no | [ See App Launch Button Customization section for options](#app-launch-button-customization) | Quick launch apps customization |
 |hdmi_1<br>hdmi_2<br>hdmi_3</br>hdmi_4| string | no | Personalized name for this HDMI input | The name entered here will appear on the button (truncated to 8 characters to fit) |
@@ -218,7 +220,7 @@ You are not limited to only using the launcher buttons that come with Firemote. 
 
 Example:
 ```yaml
-type: custom:firemote-card
+type: custom:firemote-plus-card
 entity: media_player.fire_tv_192_168_107_88
 device_family: amazon-fire
 device_type: fire_tv_4_series
