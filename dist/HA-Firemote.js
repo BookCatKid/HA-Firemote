@@ -464,7 +464,12 @@ class FiremoteCard extends LitElement {
 
   setConfig(config) {
     if (!config.entity) {
-     throw new Error("entity must be defined. You need to define an Apple TV, Chromecast, Fire TV, NVIDIA Shield, onn., Roku, Xiaomi Mi, or any other media_player entity");
+      if(config.device_family === 'tivo') {
+        config.entity = 'none';
+      }
+      else {
+        throw new Error("entity must be defined. You need to define an Apple TV, Chromecast, Fire TV, NVIDIA Shield, onn., Roku, Xiaomi Mi, or any other media_player entity");
+      }
     }
     this._config = config;
   }
@@ -6120,7 +6125,12 @@ class FiremoteCard extends LitElement {
 
 
         if(['samsung-tv', 'tivo'].includes(deviceFamily)) {
+          const hasMediaPlayerEntity = entity && entity != 'none' && typeof _hass.states[entity] !== 'undefined';
           if(buttonID == 'power-button' && actionType == 'click') {
+            if(!hasMediaPlayerEntity) {
+              unsupportedButton();
+              return;
+            }
             const state = _hass.states[entity];
             const stateStr = state ? state.state : 'off';
             if(stateStr != 'off' && stateStr != 'unavailable' && stateStr != 'standby') {
@@ -6132,6 +6142,10 @@ class FiremoteCard extends LitElement {
             return;
           }
           if(buttonID == 'playpause-button' && actionType == 'click') {
+            if(!hasMediaPlayerEntity) {
+              unsupportedButton();
+              return;
+            }
             _hass.callService('media_player', 'media_play_pause', { entity_id: _config.entity});
             return;
           }
@@ -8248,6 +8262,9 @@ class FiremoteCardEditor extends LitElement {
       mediaPlayerEntities = this.getMediaPlayerEntitiesByPlatform('tivo');
       mediaPlayerEntities = [...mediaPlayerEntities, ...this.getMediaPlayerEntitiesByPlatform('pytivo')];
       mediaPlayerEntities = [...new Set([...mediaPlayerEntities, ...this.getEntitiesByType('media_player').filter((eid) => /tivo/i.test(eid))])];
+      if(mediaPlayerEntities.length == 0) {
+        mediaPlayerEntities = ['none'];
+      }
       heading = this.hass.config.language == 'he' || this.hass.config.language == 'fr' ?
         this.translateToUsrLang('Entity') + ' TiVo Media Player' : 'TiVo Media Player '+ this.translateToUsrLang('Entity');
     }
@@ -8267,11 +8284,12 @@ class FiremoteCardEditor extends LitElement {
             @change=${this.configChanged} >
             ${blankEntity}
             ${mediaPlayerEntities.map((eid) => {
+              const optionLabel = eid == 'none' ? this.translateToUsrLang('None / Other') : ((this.hass.states[eid] && this.hass.states[eid].attributes.friendly_name) || eid);
               if (eid != this._config.entity) {
-                return html`<option value="${eid}">${this.hass.states[eid].attributes.friendly_name || eid}</option> `;
+                return html`<option value="${eid}">${optionLabel}</option> `;
               }
               else {
-                return html`<option value="${eid}" selected>${this.hass.states[eid].attributes.friendly_name || eid}</option> `;
+                return html`<option value="${eid}" selected>${optionLabel}</option> `;
               }
             })}
         </select>
