@@ -5851,13 +5851,13 @@ class FiremoteCard extends LitElement {
       }
       else if (deviceFamily == 'tivo') {
         const map = {
-          up:'up', down:'down', left:'left', right:'right', select:'select',
-          back:'clear', home:'tivo', menu:'info', input:'livetv', tv:'livetv', info:'info', guide:'guide',
-          rewind:'rewind', fast_forward:'forward', replay:'replay',
-          volume_up:'volumeup', volume_down:'volumedown', volume_mute:'mute',
-          channel_up:'channelup', channel_down:'channeldown',
-          num0:'num0', num1:'num1', num2:'num2', num3:'num3', num4:'num4',
-          num5:'num5', num6:'num6', num7:'num7', num8:'num8', num9:'num9'
+          up:'UP', down:'DOWN', left:'LEFT', right:'RIGHT', select:'SELECT',
+          back:'CLEAR', home:'TIVO', menu:'INFO', input:'LIVETV', tv:'LIVETV', info:'INFO', guide:'GUIDE',
+          rewind:'REVERSE', fast_forward:'FORWARD', replay:'REPLAY',
+          volume_up:'VOLUMEUP', volume_down:'VOLUMEDOWN', volume_mute:'MUTE',
+          channel_up:'CHANNELUP', channel_down:'CHANNELDOWN',
+          num0:'NUM0', num1:'NUM1', num2:'NUM2', num3:'NUM3', num4:'NUM4',
+          num5:'NUM5', num6:'NUM6', num7:'NUM7', num8:'NUM8', num9:'NUM9'
         };
         mappedCommand = map[command];
       }
